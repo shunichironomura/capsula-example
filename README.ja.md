@@ -1,33 +1,33 @@
-# Capsula Example Repository
+# Capsula サンプルリポジトリ
 
-This repository demonstrates the use of Capsula.
+このリポジトリは Capsula の使用方法を示しています。
 
-## Prerequisites
+## 前提条件
 
 - [Capsula](https://github.com/ut-issl/capsula)
 - [uv](https://docs.astral.sh/uv/)
 
-## Running the Example
+## サンプルの実行
 
-### Running without Capsula
+### Capsula を使わずに実行
 
-Run the script directly using `uv`:
+`uv` を使ってスクリプトを直接実行します：
 
 ```bash
 uv run python scripts/calc_pi.py
 ```
 
-This will print the estimated value of π to the console and output the plot to `monte_carlo_pi_estimation.png`.
+これにより、推定された π の値がコンソールに出力され、プロットが `monte_carlo_pi_estimation.png` に出力されます。
 
-You can specify the number of samples and a random seed:
+サンプル数と乱数シードを指定できます：
 
 ```bash
 uv run python scripts/calc_pi.py --n-samples 100000 --seed 42
 ```
 
-### Running with Capsula
+### Capsula を使って実行
 
-Run the script using Capsula to capture the execution:
+Capsula を使ってスクリプトを実行し、実行内容をキャプチャします：
 
 ```
 ❯ capsula run uv run python scripts/calc_pi.py --n-samples 100000 --seed 42
@@ -38,17 +38,17 @@ Points inside circle: 78507
 Estimated value of π: 3.14028
 ```
 
-Capsula run ID, run name, and run directory will be displayed.
+Capsula の実行 ID、実行名、実行ディレクトリが表示されます。
 
-The run directory contains the following files:
+実行ディレクトリには以下のファイルが含まれます：
 
 ```
 .capsula/pi-estimation/2025-12-03/064330-purring-fear
 ├── _capsula
-│   ├── command.json
-│   ├── metadata.json
-│   ├── post-run.json
-│   └── pre-run.json
+│   ├── command.json
+│   ├── metadata.json
+│   ├── post-run.json
+│   └── pre-run.json
 ├── capsula-example.patch
 ├── capsula.toml
 ├── monte_carlo_pi_estimation.png
@@ -56,13 +56,13 @@ The run directory contains the following files:
 └── uv.lock
 ```
 
-Notice that the generated plot `monte_carlo_pi_estimation.png` is moved to the run directory.
+生成されたプロット `monte_carlo_pi_estimation.png` が実行ディレクトリに移動されていることに注目してください。
 
-And the run name is embedded in the plot image:
+実行名がプロット画像に埋め込まれています：
 
-![Plot with embedded run name](assets/monte_carlo_pi_estimation.png)
+![実行名が埋め込まれたプロット](assets/monte_carlo_pi_estimation.png)
 
-You can list all runs using:
+すべての実行を一覧表示するには：
 
 ```
 ❯ capsula list
@@ -77,6 +77,6 @@ TIMESTAMP (UTC)      NAME                  COMMAND
 2025-12-03 06:33:25  bouncy-spiders        uv run python scripts/calc_pi.py
 ```
 
-#### Customizing Capsula Configuration
+#### Capsula 設定のカスタマイズ
 
-See the [capsula.toml](./capsula.toml) file for the configuration used in this example.
+この例で使用されている設定については、[capsula.toml](./capsula.toml) ファイルを参照してください。
