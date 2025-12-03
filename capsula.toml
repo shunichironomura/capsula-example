@@ -1,0 +1,42 @@
+[vault]
+name = "pi-estimation"
+
+[[pre-run.hooks]]
+id = "capture-machine"
+
+[[pre-run.hooks]]
+id = "capture-cwd"
+
+[[pre-run.hooks]]
+id = "capture-git-repo"
+name = "capsula-example"
+path = "."  # Relative to the project root.
+allow_dirty = true
+
+[[pre-run.hooks]]
+id = "capture-file"
+glob = "capsula.toml"
+mode = "copy"
+hash = "sha256"
+
+[[pre-run.hooks]]
+id = "capture-file"
+glob = "pyproject.toml"
+mode = "copy"
+hash = "sha256"
+
+[[pre-run.hooks]]
+id = "capture-file"
+glob = "uv.lock"
+mode = "copy"
+hash = "sha256"
+
+[[pre-run.hooks]]
+id = "capture-command"
+command = ["uv", "sync", "--locked"]
+
+[[post-run.hooks]]
+id = "capture-file"
+glob = "monte_carlo_pi_estimation.png"
+mode = "move"
+hash = "sha256"
