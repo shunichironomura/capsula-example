@@ -8,6 +8,7 @@ authors = [
   { name = "Shunichiro Nomura", email = "nomura@space.t.u-tokyo.ac.jp" },
 ]
 dependencies = [
+  "matplotlib>=3.10.7",
   "rich>=14.2.0",
   "typer>=0.20.0",
 ]
