@@ -7,29 +7,24 @@ requires-python = ">=3.13"
 authors = [
   { name = "Shunichiro Nomura", email = "nomura@space.t.u-tokyo.ac.jp" },
 ]
+dependencies = [
+  "rich>=14.2.0",
+  "typer>=0.20.0",
+]
 
 [dependency-groups]
 dev = [
   "pre-commit>=4.2.0",
   { include-group = "ruff" },
-  { include-group = "test" },
   { include-group = "typing" },
 ]
 ruff = ["ruff>=0.11.13"]
-test = [
-  "pytest>=8.4.1",
-]
 typing = [
   "mypy>=1.16.1",
-  { include-group = "test" },
 ]
 
 [tool.mypy]
 strict = true
-
-[tool.pytest.ini_options]
-addopts = "-ra --verbose --verbose --capture=no --strict-markers --color=yes --log-cli-level=INFO"
-testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 120
@@ -66,19 +61,10 @@ ignore = [
   #     "EM101",   # raw-string-in-exception
   #     "TRY003",  # Avoid specifying long messages outside the exception class
   # "UP040", # uses `TypeAlias` annotation instead of the `type` keyword. This is to be compatible with griffe.
+  "INP001",  # implicit-namespace-package
+  "D100",  # missing docstring in public module
+  "S311",  # standard-pseudo-random-generators-are-not-suitable-for-security-cryptographic-purposes
 ]
 unfixable = [
   "F401",  # Prevent auto-fix for unused imports
-]
-
-[tool.ruff.lint.per-file-ignores]
-"tests/**.py" = [
-  "D",  # Docstring
-  "INP001",  # implicit-namespace-package
-  "ANN201",  # missing-return-type-undocumented-public-function
-  "S101",  # use of assert
-]
-"scripts/**.py" = [
-  "INP001",  # implicit-namespace-package
-  "D100",  # missing docstring in public module
 ]
