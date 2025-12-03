@@ -38,7 +38,7 @@ def _plot_points(points: Collection[tuple[float, float]], ax: Axes) -> Axes:
 
 @app.command()
 def main(
-    n_samples: Annotated[int, typer.Option(..., help="Number of random samples to generate")],
+    n_samples: Annotated[int, typer.Option(..., help="Number of random samples to generate")] = 1_000,
     seed: Annotated[
         int | None,
         typer.Option(..., help="Random seed for reproducibility. If not provided, a random seed is used."),
