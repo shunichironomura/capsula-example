@@ -28,7 +28,7 @@ def _plot_points(points: Collection[tuple[float, float]], ax: Axes) -> Axes:
     ax.set_ylim(-1, 1)
     ax.scatter(xs_inside, ys_inside, color="blue", s=0.5, alpha=0.5, label="Inside Circle")
     ax.scatter(xs_outside, ys_outside, color="red", s=0.5, alpha=0.5, label="Outside Circle")
-    ax.add_patch(plt.Circle((0, 0), 1, color="black", fill=False, linestyle="-"))
+    ax.add_patch(plt.Circle((0, 0), 1, color="black", fill=False, linestyle="-"))  # type: ignore[attr-defined]
     ax.set_title("Monte Carlo Sampling for π Estimation")
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
