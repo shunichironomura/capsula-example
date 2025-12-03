@@ -1,3 +1,4 @@
+import os
 import random
 from collections.abc import Collection
 from typing import Annotated, NoReturn
@@ -55,6 +56,12 @@ def main(
     # Plot the points
     fig, ax = plt.subplots(figsize=(6, 6))
     _plot_points(points, ax)
+
+    # Add Capsula run name to the plot if available
+    # Run with `capsula run -- uv run python scripts/calc_pi.py...` to see the run name on the plot
+    if (capsula_run_name := os.getenv("CAPSULA_RUN_NAME")) is not None:
+        plt.suptitle(f"Run: {capsula_run_name}", y=0.98, fontsize=10, color="gray")
+
     fig.tight_layout()
     fig.savefig("monte_carlo_pi_estimation.png")
 
