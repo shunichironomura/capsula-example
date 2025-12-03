@@ -1,0 +1,61 @@
+# Vault configuration: defines where and how Capsula stores captured data
+[vault]
+# Name of the vault - this creates a namespace for organizing your captured runs
+name = "pi-estimation"
+
+# Pre-run hooks: actions executed BEFORE your main script runs
+# These capture the execution context and environment for reproducibility
+
+# Captures machine information (hostname, CPU, memory, etc.)
+[[pre-run.hooks]]
+id = "capture-machine"
+
+# Captures the current working directory where the script is executed
+[[pre-run.hooks]]
+id = "capture-cwd"
+
+# Captures the state of a Git repository
+[[pre-run.hooks]]
+id = "capture-git-repo"
+name = "capsula-example"  # Name to identify this repository in the vault
+path = "."  # Path to the repository (relative to the project root)
+allow_dirty = true  # Allow capturing even if there are uncommitted changes
+
+# Captures configuration files for reproducibility
+# These files define the project setup and dependencies
+
+# Capture the Capsula configuration itself
+[[pre-run.hooks]]
+id = "capture-file"
+glob = "capsula.toml"  # File pattern to match
+mode = "copy"  # Copy the file into the vault (vs "move" which relocates it)
+hash = "sha256"  # Compute SHA-256 hash for integrity verification
+
+# Capture Python project metadata
+[[pre-run.hooks]]
+id = "capture-file"
+glob = "pyproject.toml"
+mode = "copy"
+hash = "sha256"
+
+# Capture exact dependency versions
+[[pre-run.hooks]]
+id = "capture-file"
+glob = "uv.lock"
+mode = "copy"
+hash = "sha256"
+
+# Captures the output of a command (useful for recording environment state)
+[[pre-run.hooks]]
+id = "capture-command"
+command = ["uv", "sync", "--locked"]  # Ensures dependencies are synchronized
+
+# Post-run hooks: actions executed AFTER your main script completes
+# These capture outputs and results
+
+# Captures the generated visualization
+[[post-run.hooks]]
+id = "capture-file"
+glob = "monte_carlo_pi_estimation.png"  # Output file to capture
+mode = "move"  # Move (not copy) the file into the vault
+hash = "sha256"  # Compute hash for the output file
